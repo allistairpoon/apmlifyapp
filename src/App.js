@@ -1,46 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Amplify, { API } from 'aws-amplify';
-import aws_exports from './aws-exports';
-import {Container, Label, Form, Input, Search, Sidebar, Segment, Button, Menu, Image, Icon, Header, Grid, Message } from 'semantic-ui-react'
-import ItemDashboard from './screens/itemDashboard'
-import TableDisplay from './screens/tableDisplay'
-import CreateItemModal from './screens/createItem'
-import { withAuthenticator } from 'aws-amplify-react'
+import React, { Component } from "react";
+import Amplify from "aws-amplify";
+import aws_exports from "./aws-exports";
+import { Segment, Menu } from "semantic-ui-react";
+import PlayersForm from "./screens/playersForm";
+import ScoresForm from "./screens/scoresForm";
+import TableScores from "./screens/tableScores";
+import "./App.css";
 
 Amplify.configure(aws_exports);
 
-let apiName = 'sampleCloudApi';
-let path = '/items';
-
-
 class App extends Component {
-
-  constructor(props) {
-    super(props)
-  }
-
-  componentDidMount(){
-    API.get(apiName, path).then(response => {
-      console.log(response)
-    });
-  }
-
-  
 
   render() {
     return (
       <Segment>
         <Menu>
-           {/* <Menu.Item name='home'> <Icon name="shop"/></Menu.Item> */}
-           <Menu.Item name='Scores'/>
-           <Menu.Item name='Players' />
-         </Menu>
-         <ItemDashboard />
-         <TableDisplay />
+          <Menu.Item name="Scores" />
+          <Menu.Item name="Players" />
+        </Menu>
+        <ScoresForm />
+        <PlayersForm />
+        <TableScores />
       </Segment>
-
     );
   }
 }
